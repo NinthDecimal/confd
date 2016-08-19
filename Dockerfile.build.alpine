@@ -1,12 +1,11 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
 ENV GOPATH /go
-ENV GO15VENDOREXPERIMENT 1
+ENV CGO_ENABLED 0
 
-RUN mkdir -p "$GOPATH/src/" "$GOPATH/bin" && chmod -R 777 "$GOPATH" && \
-    mkdir -p /go/src/github.com/kelseyhightower/confd
-
-RUN apk --update add go bash && \
-    ln -s /go/src/github.com/kelseyhightower/confd /app
+RUN apk add --update -t build-deps go bash \
+ && rm -rf /var/cache/apk/* \
+ && mkdir -p /go/src/github.com/kelseyhightower/confd \
+ && ln -s /go/src/github.com/kelseyhightower/confd /app
 
 WORKDIR /app
