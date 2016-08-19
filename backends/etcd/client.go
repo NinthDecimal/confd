@@ -38,7 +38,7 @@ func NewEtcdClient(machines []string, cert, key, caCert string, basicAuth bool, 
 
 	cfg := client.Config{
 		Endpoints:               machines,
-		HeaderTimeoutPerRequest: time.Duration(3) * time.Second,
+		HeaderTimeoutPerRequest: time.Duration(9) * time.Second,
 	}
 
 	if basicAuth {
